@@ -10,24 +10,31 @@ import org.springframework.stereotype.Component;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
+/**
+ * 注解实现逻辑
+ */
 @Aspect
 @Component
 public class MethodTimeAspect {
+
+    //切点
     @Pointcut("@annotation(com.leehikuan.springbootstudy.myannotation.MethodTime)")
     private void pointCut(){
 
     };
 
+    //切点前执行
     @Before("pointCut()")
     public void beforeMethod(){
         System.out.println("我是before方法");
     }
+    //切点后执行
     @After("pointCut()")
     public void afterMethod(){
         System.out.println("我是After方法");
 
     }
-
+    
     @Around("pointCut()")
     public  <T> T around(ProceedingJoinPoint pjp) throws Throwable {
         System.out.println("进入around方法");
